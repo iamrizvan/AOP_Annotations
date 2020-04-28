@@ -15,8 +15,16 @@ public class Diagnose {
 //	@Pointcut("execution(* org.studyeasy.cars.PetrolCar.*(*,*))")
 //	@Pointcut("execution(void org.studyeasy.cars.PetrolCar.run(*))")    // '*' wildcard is used for single parameter of any type
 //	@Pointcut("execution(* org.studyeasy.cars.PetrolCar.run(..))")      // '*' wildcard is used for any type of return type method
-	@Pointcut("execution(* org.studyeasy.cars.PetrolCar.run(..))")   // '..' wildcard is used for multiple parameter of any type
+//	@Pointcut("execution(public * org.studyeasy.cars.PetrolCar.run(..))")   // '..' wildcard is used for multiple parameter of any type
+//	public void run() {	}
+	
+	
+	
+	// within 
+//	@Pointcut("within(org.studyeasy.cars.*)") 
+	@Pointcut("within(org.studyeasy.service.Cars)") 
 	public void run() {	}
+	
 	
 	@Before("run()")
 	public void beforeAdvice()
