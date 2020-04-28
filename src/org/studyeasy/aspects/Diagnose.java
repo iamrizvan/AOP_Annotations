@@ -1,44 +1,28 @@
 package org.studyeasy.aspects;
 
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.studyeasy.cars.PetrolCar;
 
 @Aspect
 public class Diagnose {
+
 	
-//	@Pointcut("execution(* org.studyeasy.cars.PetrolCar.*(*,*))")
-//	@Pointcut("execution(void org.studyeasy.cars.PetrolCar.run(*))")    // '*' wildcard is used for single parameter of any type
-//	@Pointcut("execution(* org.studyeasy.cars.PetrolCar.run(..))")      // '*' wildcard is used for any type of return type method
-//	@Pointcut("execution(public * org.studyeasy.cars.PetrolCar.run(..))")   // '..' wildcard is used for multiple parameter of any type
-//	public void run() {	}
-	
-	
-	
-	// within 
-//	@Pointcut("within(org.studyeasy.cars.*)") 
-	@Pointcut("within(org.studyeasy.service.Cars)") 
-	public void run() {	}
-	
-	
-	@Before("run()")
-	public void beforeAdvice()
+	@Before("execution(void run(int,int))")
+	public void beforeAdvice(JoinPoint jp)
 	{
+	//	System.out.println(jp.toString());
+		PetrolCar car = (PetrolCar) jp.getTarget();
+		car.run("sexiest car ever");
+		
+		for(Object ob : jp.getArgs())
+		{
+			System.out.println("Passed parameter :" +ob);
+		}
 		System.out.println("Before advice message");
 		
 	}
-	
 
-	@After("run()")
-	public void afterAdvice()
-	{
-		System.out.println("After advice message");
-		
-	}
 	
 }
