@@ -12,21 +12,25 @@ import org.aspectj.lang.annotation.Pointcut;
 @Aspect
 public class Diagnose {
 	
-	@Pointcut("execution(void org.studyeasy.cars.PetrolCar.run())")
+//	@Pointcut("execution(* org.studyeasy.cars.PetrolCar.*(*,*))")
+//	@Pointcut("execution(void org.studyeasy.cars.PetrolCar.run(*))")    // '*' wildcard is used for single parameter of any type
+//	@Pointcut("execution(* org.studyeasy.cars.PetrolCar.run(..))")      // '*' wildcard is used for any type of return type method
+	@Pointcut("execution(* org.studyeasy.cars.PetrolCar.run(..))")   // '..' wildcard is used for multiple parameter of any type
 	public void run() {	}
 	
-	@Around("run()")
-	public void aroundAdvice(ProceedingJoinPoint jp)
+	@Before("run()")
+	public void beforeAdvice()
 	{
-		System.out.println("Around advice intial message");
+		System.out.println("Before advice message");
 		
-		try {
-			jp.proceed();
-		} catch (Throwable e) {
-			System.out.println(e.getMessage());
-		}
+	}
+	
+
+	@After("run()")
+	public void afterAdvice()
+	{
+		System.out.println("After advice message");
 		
-		System.out.println("Around advice later message");
 	}
 	
 }
