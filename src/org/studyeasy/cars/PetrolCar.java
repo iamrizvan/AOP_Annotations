@@ -18,4 +18,14 @@ public class PetrolCar {
 		return "GOA";
 	}
 	
+	public String run(int rank, String sexy) {
+		System.out.println("Petrol car is "+sexy+" which posses the rank # "+rank);
+		return "GOA";
+	}
+	
+	public String run(int rank, String sexy, int speed) {
+		System.out.println("Petrol car is "+sexy+" which posses the rank # "+rank+" this is known for its highest speed of :"+speed+
+				"km/hr");
+		return "GOA";
+	}
 }

@@ -1,26 +1,22 @@
 package org.studyeasy.aspects;
 
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.studyeasy.cars.PetrolCar;
+import org.aspectj.lang.annotation.Pointcut;
 
 @Aspect
 public class Diagnose {
 
 	
-	@Before("execution(void run(int,int))")
-	public void beforeAdvice(JoinPoint jp)
+//	@Pointcut("args(int,..)") list of arguments with wildcards
+	@Pointcut("args(temp)")
+	public void pointcut(int temp) {}
+	
+	@Before("pointcut(temp)")
+	public void beforeAdvice(int temp)
 	{
-	//	System.out.println(jp.toString());
-		PetrolCar car = (PetrolCar) jp.getTarget();
-		car.run("sexiest car ever");
-		
-		for(Object ob : jp.getArgs())
-		{
-			System.out.println("Passed parameter :" +ob);
-		}
-		System.out.println("Before advice message");
+		System.out.println("Arguments value :" + temp);
+	System.out.println("Before advice message");
 		
 	}
 
